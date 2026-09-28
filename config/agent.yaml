@@ -1,0 +1,24 @@
+# Agent Manifest — AgentRegistry entry point
+id: "CMN-C2-687"
+name: "Meeting Commitment Ledger & Follow-up Recall Agent"
+namespace: "cmn"
+version: "1.0.0"
+enabled: true
+category: "Cat 2"
+generation_mode: "llm"
+industry: "CMN"
+
+# Opaque compatibility metadata. The concrete graph inherits AgentBaseGraph directly.
+base_type: "DocGenerationAgent"
+
+# Entry point — single dotted import path (module.Class).
+class: "src.graph.MeetingCommitmentLedgerAgent"
+
+# Security
+required_trust_level: "VERIFIED_EXTERNAL"
+
+# Compile-time gates. The LLM is injected by the caller; this template does not
+# construct a provider-specific client and has no mandatory secret lookups.
+requires:
+  secrets: []
+  extras: []

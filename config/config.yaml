@@ -1,0 +1,29 @@
+# Runtime parameters loaded separately from the static agent manifest.
+max_retry: 3
+timeout_seconds: 60          # transcript extraction + ledger match are LLM-bound
+
+# Advisory per-invocation cost budget for utilities to tune. AgentBaseGraph does
+# not enforce this value; enforcement, if any, is caller/LLM-client-side.
+budget_usd_advisory: 2.50
+
+# Mode dispatch (selected by the input `mode` field).
+default_mode: "invoke"
+staging_ttl_seconds: 604800  # 7d: brief_id staging record expiry
+
+# Retrieval / recall tuning.
+recall_top_k: 8
+recall_score_threshold: 0.70
+match_open_only: true
+
+# S-2 input quality gate bounds.
+input_min_chars: 20
+input_max_chars: 200000
+input_max_replacement_char_ratio: 0.02
+input_max_control_char_ratio: 0.02
+input_min_printable_ratio: 0.90
+
+# HITL and memory remain disabled by design. The workflow uses separate stateless
+# invoke and feedback calls, so no suspend/resume checkpointer is required.
+memory_enabled: false
+hitl:
+  enabled: false
